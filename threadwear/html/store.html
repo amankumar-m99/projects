@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+   <!-- Required meta tags -->
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+   <!-- favicon -->
+   <link rel="shortcut icon" href="../images/logo/favicon.png" type="image/x-icon">
+
+   <title>Store | Threadwear</title>
+
+   <!-- Bootstrap CSS -->
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+
+   <!-- jquery -->
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head>
+
+<body onload="parseQuery()">
+
+   <!-- navbar -->
+   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+         <a class="navbar-brand d-flex align-items-center" href="../index.html">
+            <img src="../images/logo/brand_img.png" alt="threadwear logo pic" width="40" height="40"
+               style="border-radius: 50%; margin: auto 10px;" class="d-inline-block align-text-top">
+            <span class="navbar-brand mb-0 h1">Threadwear</span>
+         </a>
+         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+         </button>
+         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+               <li class="nav-item">
+                  <a class="nav-link" href="../index.html">Home</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="#">Store</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="about.html">About</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="contact.html">Contact Us</a>
+               </li>
+            </ul>
+            <form class="d-flex">
+               <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+               <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+         </div>
+      </div>
+   </nav>
+
+   <!-- shop by category -->
+   <div class="container my-1 my-md-4">
+      <div class="row align-items-center">
+         <div class="col-12 col-md-auto d-flex justify-content-center my-1">
+            <span class="h4">Shop By Category</span>
+         </div>
+         <div class="col-12 col-md-auto d-flex justify-content-center my-1">
+            <div class="btn-group" role="group" aria-label="Basic outlined example">
+               <button type="button" class="btn btn-outline-primary" id="men-tab-btn">Men</button>
+               <button type="button" class="btn btn-outline-primary" id="women-tab-btn">Women</button>
+               <button type="button" class="btn btn-outline-primary" id="kids-tab-btn">Kids</button>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <div id="category"></div>
+
+   <!-- footer -->
+   <footer>
+      <span class="my-5 pt-5 text-muted text-center text-small">
+         <p class="mb-1">© 2021 Threadwear</p>
+         <ul class="list-inline">
+            <li class="list-inline-item"><a href="privacymodal.html" id="launch-privacy-modal">Privacy</a></li>
+            <li class="list-inline-item"><a href="termsmodal.html" id="launch-terms-modal">Terms</a></li>
+            <li class="list-inline-item"><a href="supportmodal.html" id="launch-support-modal">Support</a></li>
+         </ul>
+
+      </span>
+
+      <!-- PRIVACY Modal -->
+      <div class="modal fade my-10" id="privacy-modal" tabindex="-1" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+         <div class="modal-dialog modal-xl modal-fullscreen-lg-down modal-dialog-scrollable modal-dialog-centered">
+            <div class="modal-content"></div>
+         </div>
+      </div>
+
+      <!-- TERMS Modal -->
+      <div class="modal fade my-10" id="terms-modal" tabindex="-1" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+         <div class="modal-dialog modal-xl modal-fullscreen-lg-down modal-dialog-scrollable modal-dialog-centered">
+            <div class="modal-content"></div>
+         </div>
+      </div>
+
+      <!-- SUPPORT Modal -->
+      <div class="modal fade my-10" id="support-modal" tabindex="-1" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+         <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
+            <div class="modal-content"></div>
+         </div>
+      </div>
+
+      <!-- jquery for footer -->
+      <script>
+         $('#launch-privacy-modal').on('click', function (e) {
+            e.preventDefault();
+            $('#privacy-modal').modal('show').find('.modal-content').load($(this).attr('href'));
+         });
+
+         $('#launch-terms-modal').on('click', function (e) {
+            e.preventDefault();
+            $('#terms-modal').modal('show').find('.modal-content').load($(this).attr('href'));
+         });
+         $('#launch-support-modal').on('click', function (e) {
+            e.preventDefault();
+            $('#support-modal').modal('show').find('.modal-content').load($(this).attr('href'));
+         });
+      </script>
+   </footer>
+
+   <!-- custom JavaScript to switch categories -->
+   <script>
+      function parseQuery() {
+         var queryString = window.location.search;
+         var query = {};
+         var pairs = (queryString[0] === '?' ? queryString.substr(1) : queryString).split('&');
+         for (var i = 0; i < pairs.length; i++) {
+            var pair = pairs[i].split('=');
+            query[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1] || '');
+         }
+         if (query.storeID == 'women') {
+            let women = document.getElementById('women-tab-btn');
+            women.classList.remove("btn-outline-primary");
+            women.classList.add("btn-primary");
+            $('#category').load('women.html');
+         }
+         else if (query.storeID == 'kids') {
+            let kids = document.getElementById('kids-tab-btn');
+            kids.classList.remove("btn-outline-primary");
+            kids.classList.add("btn-primary");
+            $('#category').load('kids.html');
+         }
+         else {
+            let men = document.getElementById('men-tab-btn');
+            men.classList.remove("btn-outline-primary");
+            men.classList.add("btn-primary");
+            $('#category').load('men.html');
+         }
+      }
+
+      $(document).ready(function () {
+         $('#men-tab-btn').click(function () {
+            $('#women-tab-btn, #kids-tab-btn').removeClass("btn-primary").addClass("btn-outline-primary");
+            $("#men-tab-btn").removeClass("btn-outline-primary").addClass("btn-primary");
+            $('#category').load('men.html');
+         });
+
+         $('#women-tab-btn').click(function () {
+            $('#men-tab-btn, #kids-tab-btn').removeClass("btn-primary").addClass("btn-outline-primary");
+            $("#women-tab-btn").removeClass("btn-outline-primary").addClass("btn-primary");
+            $('#category').load('women.html');
+         });
+
+         $('#kids-tab-btn').click(function () {
+            $('#men-tab-btn, #women-tab-btn').removeClass("btn-primary").addClass("btn-outline-primary");
+            $("#kids-tab-btn").removeClass("btn-outline-primary").addClass("btn-primary");
+            $('#category').load('kids.html');
+         });
+      });
+   </script>
+
+   <!-- Bootstrap Bundle with Popper -->
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+      crossorigin="anonymous"></script>
+
+</body>
+</html>
